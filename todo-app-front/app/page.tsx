@@ -5,8 +5,8 @@ export default function Home() {
     <div className="h-screen flex justify-center items-center">
       <main>
         <section className="text-slate-900 flex flex-col justify-center items-center gap-8">
-          <h1 className="font-semibold text-2xl lg:text-8xl">TODO APP</h1>
-          <p className="text-center text-xl w-96 lg:w-2xl lg:text-4xl">
+          <h1 className="font-semibold text-4xl lg:text-8xl">TODO APP</h1>
+          <p className="text-center text-xl w-80 lg:w-2xl lg:text-4xl">
             The simple platform to manage your daily tasks and boost your
             productivity.
           </p>

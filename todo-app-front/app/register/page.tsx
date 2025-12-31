@@ -55,7 +55,7 @@ export default function Register() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full max-w-sm h-14 p-3 border-gray-300 border rounded-lg focus:ring-2 focus:ring-black outline-none transition"
+              className="w-64 h-14 p-2 border-gray-400 border rounded-lg lg:w-96"
               placeholder="Name"
             />
             <input
@@ -63,7 +63,7 @@ export default function Register() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full max-w-sm h-14 p-3 border-gray-300 border rounded-lg focus:ring-2 focus:ring-black outline-none transition"
+              className="w-64 h-14 p-2 border-gray-400 border rounded-lg lg:w-96"
               placeholder="Email"
             />
             <input
@@ -71,7 +71,7 @@ export default function Register() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full max-w-sm h-14 p-3 border-gray-300 border rounded-lg focus:ring-2 focus:ring-black outline-none transition"
+              className="w-64 h-14 p-2 border-gray-400 border rounded-lg lg:w-96"
               placeholder="Password"
             />
             <button

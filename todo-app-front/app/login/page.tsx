@@ -1,4 +1,4 @@
-"use client"; // Obligatoire pour utiliser useState et les événements
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -22,7 +22,6 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        // Succès : on stocke le token et on redirige
         localStorage.setItem("token", data.token);
         localStorage.setItem("userName", data.user.name);
         router.push("/tasks");
@@ -37,27 +36,27 @@ export default function Login() {
   return (
     <div className="h-screen flex justify-center items-center bg-gray-50">
       <main className="w-screen h-screen flex justify-center items-center">
-        <section className="h-3/5 w-lg text-black p-4 flex flex-col justify-center items-center gap-8 shadow-xl rounded-lg">
+        <section className="h-3/5 w-80 text-black p-4 flex flex-col justify-center items-center gap-8 shadow-xl rounded-lg lg:w-lg">
           <h1 className="font-semibold text-2xl">Login</h1>
 
           <form
-            onSubmit={handleSubmit} // On lie la fonction ici
+            onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center gap-4"
           >
             <input
               type="email"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)} // On capte la saisie
-              className="w-96 h-14 p-2 border-gray-400 border rounded-lg"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-64 h-14 p-2 border-gray-400 border rounded-lg lg:w-96"
               placeholder="email"
             />
             <input
               type="password"
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)} // On capte la saisie
-              className="w-96 h-14 p-2 border-gray-400 border rounded-lg"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-64 h-14 p-2 border-gray-400 border rounded-lg lg:w-96"
               placeholder="password"
             />
             <button
