@@ -5,32 +5,40 @@ import TaskForm from "@/components/TaskForm";
 import TaskItem from "@/components/TaskItem";
 
 export default function TasksPage() {
-  // 1. Initialisation neutre (identique serveur/client)
-  const [userName, setUserName] = useState<string>("Utilisateur");
+  const [userName, setUserName] = useState("Utilisateur");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [tasks, setTasks] = useState<any[]>([]);
+  useEffect(() => {
+    const savedName = localStorage.getItem("userName");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (savedName) setUserName(savedName);
+  }, []);
 
-  // 2. Fonctions de logique
-  const fetchTasks = async () => {
-    // Note : localStorage est sûr ici car fetchTasks est appelé dans useEffect
-    const token = localStorage.getItem("token");
-    if (!token) return;
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
 
-    const res = await fetch("http://127.0.0.1:8000/api/tasks", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
+        const res = await fetch("http://127.0.0.1:8000/api/tasks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        });
 
-    if (res.ok) {
-      const data = await res.json();
-      setTasks(data);
-    }
-  };
+        if (res.ok) {
+          const data = await res.json();
+          setTasks(data);
+        }
+      } catch {
+        console.error("Erreur réseau");
+      }
+    };
+    fetchTasks();
+  }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleTaskCreated = (newTask: any) => {
+  const handleTaskCreated = (newTask: []) => {
     setTasks((prev) => [newTask, ...prev]);
   };
 
@@ -63,13 +71,6 @@ export default function TasksPage() {
       setTasks((prev) => prev.filter((t) => t.id !== id));
     }
   };
-
-  useEffect(() => {
-    const savedName = localStorage.getItem("userName");
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (savedName) setUserName(savedName);
-    fetchTasks();
-  }, []);
 
   return (
     <main className="p-4 lg:px-20 bg-gray-50 min-h-screen">
